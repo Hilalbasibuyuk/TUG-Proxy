@@ -65,7 +65,7 @@ Forward proxy (aynı zamanda "proxy server" olarak da adlandırılır), istemci 
 - Müşteri anonimliğini artırma
 - Coğrafi olarak engellenen veya kısıtlanan içeriğe erişim
 - Kuruluşlarda içerik filtreleme ve izleme
-- Önbelleğe alma yoluyla bant genişliği tüketimini azaltma
+- Önbelleğe alma yoluyla bant genişliği tüketimini azaltma(Mesela aynı videoyu bir ağda herkes açıyor. Bunu tekrar çağırmak yerine direkt önbellekten gönderiyor videoyu)
 - Uyumluluk için kullanıcı etkinliğinin kaydedilmesi ve izlenmesi
 
 
