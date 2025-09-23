@@ -100,16 +100,30 @@ Forward proxy istemci adına hareket ederken, reverse proxy sunucu adına hareke
 
 ---
 
-### Load Balancing & Filtering
-Uygulamamıza gelen isteklerin performans sorunu yaratmaması ve yüksek erişilebilirlik değerleri için load balancing yani yük dağılımı yapmak isteyebiliriz. API gateway load balancing yapmak için de uygun bir noktadır. Servislerimizin önünde konumlanan API gateway, gelen istekleri alır ve bu istekleri belirlenen yönlendirme kurallarına göre hedef servislere yönlendirir. Ayrıca servis erişimleri için belirli IP adreslerine izin vermek veya bazı IP adreslerini kara listeye almak isteyebiliriz. API gateway bu filtrelemeyi yapmak için IP tabanlı erişim kontrolü sağlar. Bu sayede, belirli bir IP adresinden gelen istekleri kabul etmek veya reddetmek için API gateway üzerinde gerekli konfigürasyonlar yapılabilir. Bu filtreleme mekanizması, güvenlik politikalarını uygulamak ve istenmeyen erişimleri engellemek için önemli bir araçtır.
+
+## Load Balancer (Yük Dengeleyici) - Reverse Proxy'nin Bir Fonksiyonu
+
+Gelen ağ trafiğini birden fazla backend sunucusuna akıllıca dağıtan bir sistem bileşenidir. Aslında bir reverse proxy'nin sahip olabileceği en temel ve kritik işlevlerden biridir.
+
+
+
+### Amacı:
+
+- Performans ve Ölçeklenebilirlik: Tek bir sunucunun kaldıramayacağı yükü, birden fazla sunucuya paylaştırarak uygulamanın hızlı ve erişilebilir kalmasını sağlar.
+
+- Yedeklilik ve Hata Toleransı: Sunuculardan biri çökerse, trafiği sağlıklı olan diğer sunuculara yönlendirerek uygulamanın kesintisiz çalışmasını sağlar.
+
+
+
+
 
 
 --- 
 
 
-## API GATEWAY
+##  API Gateway (API Ağ Geçidi) - Özelleşmiş Bir Reverse Proxy
 
-API Gateway, istemciler (mobil uygulama, web app, IoT cihazları vb.) ile arka uç servisleri (microservice’ler) arasında tek giriş noktası olarak çalışan bir katmandır. API ağ geçidi, güvenlik politikalarını uygularken API trafiğini yöneterek istekleri ve yanıtları kontrol eder. Bu, geliştiricilerin kullanıcı kimlik doğrulaması ve hız sınırlama gibi görevler de dahil olmak üzere karmaşık API ağlarıyla uğraşmak yerine tek tek hizmetler oluşturmaya odaklanmalarına yardımcı olan merkezi bir kontrol noktası sağlayarak API yönetimini basitleştirir.
+API Gateway, istemciler (mobil uygulama, web app, IoT cihazları vb.) ile arka uç servisleri (microservice’ler) arasında tek giriş noktası olarak çalışan bir katmandır. API ağ geçidi, güvenlik politikalarını uygularken API trafiğini yöneterek istekleri ve yanıtları kontrol eder. Bu, geliştiricilerin kullanıcı kimlik doğrulaması ve hız sınırlama gibi görevler de dahil olmak üzere karmaşık API ağlarıyla uğraşmak yerine tek tek hizmetler oluşturmaya odaklanmalarına yardımcı olan merkezi bir kontrol noktası sağlayarak API yönetimini basitleştirir. Reverse proxy'nin mikroservis dünyası için özelleşmiş, çok daha "akıllı" halidir.
 
 
 ### API gateway üzerinde yürütebileceğimiz operasyonlar
@@ -122,10 +136,13 @@ API Gateway, istemciler (mobil uygulama, web app, IoT cihazları vb.) ile arka u
 
 ---
 
-## Traefik 
-**Tanım:** Traefik, modern bulut tabanlı ortamlara uygun, dinamik reverse proxy ve load balancer olarak çalışan bir araçtır. Aynı zamanda API Gateway olarak kullanılabilir.
+## Traefik (veya Nginx, HAProxy) - Bir Araç / Yazılım
+**Tanım:** Traefik, yukarıda bahsettiğimiz kavramları (reverse proxy, load balancing) hayata geçiren somut bir yazılımdır(çok güçlü bir şekilde). Modern, dinamik ve konteyner dostu (Docker, Kubernetes) bir reverse proxy ve load balancer'dır. Ek eklentileri ve yetenekleriyle (kimlik doğrulama, rate limiting) basit bir API Gateway olarak da kullanılabilir. Ancak, AWS API Gateway, Kong veya Tyk gibi tam teşekküllü API Gateway'lerin tüm gelişmiş özelliklerini içermeyebilir. Kısaca, Reverse Proxy ve Load Balancer olarak çalışan, özellikle konteyner ortamları için tasarlanmış popüler bir yazılım aracıdır diyebiliriz.
 
-- **Avantajı:** Docker, Kubernetes, Consul, Etcd gibi servis keşif (service discovery) araçları ile otomatik entegre olur. Yani yeni bir servis eklediğinizde manuel konfigürasyon yapmanıza gerek kalmaz, Traefik kendisi keşfeder.
+- **Avantajı:** Docker, Kubernetes, Consul, Etcd gibi servis keşif (service discovery) araçları ile otomatik entegre olur. Yani yeni bir servis eklediğinizde manuel konfigürasyon yapmanıza gerek kalmaz, Traefik kendisi keşfeder. (Geleneksel araçlar (Nginx) yapılandırma dosyası değişikliği ve yeniden başlatma gerektirir)
+- **Let's Encrypt Desteği:** Otomatik ve ücretsiz SSL sertifikası alımını ve yenilenmesini destekler.
+- **Dashboard:** Kullanışlı bir web arayüzü sunar.
+
 
 
 
@@ -142,6 +159,14 @@ API Gateway, istemciler (mobil uygulama, web app, IoT cihazları vb.) ile arka u
 - Observability → Monitoring (Prometheus, Grafana entegrasyonu)
 
 - Middlewares → Rate limiting, authentication, redirect, retry gibi ekstra işlemler
+
+
+### Load Balancing & Filtering
+Uygulamamıza gelen isteklerin performans sorunu yaratmaması ve yüksek erişilebilirlik değerleri için load balancing yani yük dağılımı yapmak isteyebiliriz. API gateway load balancing yapmak için de uygun bir noktadır. Servislerimizin önünde konumlanan API gateway, gelen istekleri alır ve bu istekleri belirlenen yönlendirme kurallarına göre hedef servislere yönlendirir. Ayrıca servis erişimleri için belirli IP adreslerine izin vermek veya bazı IP adreslerini kara listeye almak isteyebiliriz. API gateway bu filtrelemeyi yapmak için IP tabanlı erişim kontrolü sağlar. Bu sayede, belirli bir IP adresinden gelen istekleri kabul etmek veya reddetmek için API gateway üzerinde gerekli konfigürasyonlar yapılabilir. Bu filtreleme mekanizması, güvenlik politikalarını uygulamak ve istenmeyen erişimleri engellemek için önemli bir araçtır.
+
+
+
+
 
 
 
