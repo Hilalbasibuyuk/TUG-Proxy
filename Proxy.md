@@ -146,6 +146,24 @@ API Gateway, istemciler (mobil uygulama, web app, IoT cihazları vb.) ile arka u
 
 
 
+## Genel Bakış: Bir Benzetme ile Açıklama
+
+**Bir "Restoran Zinciri" benzetmesi yapalım:**
+
+- Müşteri: Siz (istemci / client)
+
+- Yemek Siparişi: HTTP/HTTPS isteği (request)
+
+- Restoranın Kapısındaki Görevli (Kapıcı): Reverse Proxy
+
+- Restoranın Garsonlarının Şefi / Menü Sorumlusu: API Gateway
+
+- Garsonları Farklı Masalara Yönlendiren Hostes: Load Balancer (Yük Dengeleyici)
+
+- Restoranın Mutfağı: Backend servisleriniz (web sunucuları, API'lar, mikroservisler)
+
+- Traefik: Bu restoran için özelleşmiş, hem kapıcılık hem hosteslik hem de garson şefliği yapabilen çok yetenekli ve modern bir eleman.
+
 
 
 ### KAYNAKÇA
