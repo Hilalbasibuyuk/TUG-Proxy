@@ -153,4 +153,4 @@ https://www.geeksforgeeks.org/system-design/difference-between-forward-proxy-and
 https://www.fortinet.com/resources/cyberglossary/proxy-server
 https://www.youtube.com/watch?v=4NB0NDtOwIQ
 https://blog.bytebytego.com/p/ep25-proxy-vs-reverse-proxy
-
+https://konghq.com/blog/learning-center/what-is-an-api-gateway
