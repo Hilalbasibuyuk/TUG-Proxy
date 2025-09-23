@@ -57,7 +57,7 @@ Proxy sunucusu, güvenlik duvarı ve filtre işlevi görür. Son kullanıcı vey
 
 ### Forward proxy
 
-Forward proxy (aynı zamanda "proxy sunucusu" olarak da adlandırılır), istemci cihazları ile internet arasında bulunan bir sunucudur. Bir istemci bir web sitesine veya çevrimiçi kaynağa erişim isteği gönderdiğinde, istek önce ileri proxy'ye yönlendirilir. Proxy daha sonra isteği istemci adına hedef sunucuya iletir. Gizliliği artırmak ve erişimi kontrol etmek için istemci adına hareket eder.
+Forward proxy (aynı zamanda "proxy server" olarak da adlandırılır), istemci cihazları ile internet arasında bulunan bir sunucudur. Bir istemci bir web sitesine veya çevrimiçi kaynağa erişim isteği gönderdiğinde, istek önce ileri proxy'ye yönlendirilir. Proxy daha sonra isteği istemci adına hedef sunucuya iletir. Bir istek gönderildiğinde, "proxy server" bunu inceleyerek bağlantı kurmaya devam edip etmeyeceğine karar verir. Forward proxy, tek bir giriş noktasına ihtiyaç duyan dahili ağlar için en uygunudur. Ağdakiler için IP adresi güvenliği sağlar ve kolay yönetim kontrolüne olanak tanır. Ancak, forward proxy, bir kuruluşun bireysel son kullanıcıların ihtiyaçlarını karşılama yeteneğini sınırlayabilir.Gizliliği artırmak ve erişimi kontrol etmek için istemci adına hareket eder.
 
 
 ### Forward proxy kullanımı
@@ -69,11 +69,9 @@ Forward proxy (aynı zamanda "proxy sunucusu" olarak da adlandırılır), istemc
 - Uyumluluk için kullanıcı etkinliğinin kaydedilmesi ve izlenmesi
 
 
-
 ### Reverse proxy
 
-Forward proxy istemci adına hareket ederken, reverse proxy sunucu adına hareket eder. İstemcilerin kaynak sunucuyla doğrudan iletişim kurmasını engelleyerek sunucuları korumak ve yönetmek için kullanılır. Performansı ve güvenliği optimize etmek için sunucu adına hareket eder.
-
+Forward proxy istemci adına hareket ederken, reverse proxy sunucu adına hareket eder. İstemcilerin kaynak sunucuyla doğrudan iletişim kurmasını engelleyerek sunucuları korumak ve yönetmek için kullanılır. Reverse proxy'ler, gelen çok sayıda isteğin yükünü dengelemesi gereken popüler web siteleri için güçlü bir seçenektir. Gelen istekleri yöneten başka bir web sunucusu gibi davrandıkları için bir kuruluşun bant genişliği yükünü azaltmasına yardımcı olabilirler. Olumsuz tarafı ise, bir saldırganın sızması durumunda reverse proxy'lerin HTTP sunucu mimarisini açığa çıkarabilmesidir. Bu, ağ yöneticilerinin reverse proxy kullanıyorlarsa güvenlik duvarlarını güçlendirmeleri veya yeniden konumlandırmaları gerekebileceği anlamına gelir. Performansı ve güvenliği optimize etmek için sunucu adına hareket eder.
 
 
 ### Reverse proxy kullanımı
@@ -81,8 +79,10 @@ Forward proxy istemci adına hareket ederken, reverse proxy sunucu adına hareke
 - Birden fazla web sunucusunda yük dengeleme
 - Sunucu performansını iyileştirmek için içeriği önbelleğe alma
 - Arka uç sunucularının internete doğrudan maruz kalmasının önlenmesi
-- Sunucu verimliliğini artırmak için SSL/TLS boşaltma
+- Sunucu verimliliğini artırmak için SSL/TLS boşaltma(SSL iletişimlerini şifreleyin ve şifresini çözün)
 - DDoS saldırılarını azaltma ve güvenliği artırma
+
+
 
 
 ## Forward Proxy ve Reverse Proxy arasındaki farklar
@@ -97,6 +97,9 @@ Forward proxy istemci adına hareket ederken, reverse proxy sunucu adına hareke
 | İstek Yönlendirme | İstemciden internete gelen istekleri yakalar ve iletir. | İnternetten gelen istekleri yakalar ve bunları ilgili sunucuya iletir. |
 | Önbellekleme | Yanıt sürelerini iyileştirmek için istemci tarafındaki içerikleri önbelleğe alabilir. | Yükü azaltmak ve içerik dağıtımını hızlandırmak için sunucu yanıtlarını önbelleğe alabilir. |
 | SSL/TLS | Genellikle SSL/TLS şifrelemesini işlemez. | Sunucu için şifreleme/şifre çözme görevlerini kolaylaştırarak SSL/TLS boşaltma işlemini gerçekleştirebilir. |
+
+
+
 
 
 ### KAYNAKÇA
