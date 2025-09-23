@@ -79,7 +79,8 @@ Forward proxy istemci adına hareket ederken, reverse proxy sunucu adına hareke
 - Birden fazla web sunucusunda yük dengeleme
 - Sunucu performansını iyileştirmek için içeriği önbelleğe alma
 - Arka uç sunucularının internete doğrudan maruz kalmasının önlenmesi
-- Sunucu verimliliğini artırmak için SSL/TLS boşaltma(SSL iletişimlerini şifreleyin ve şifresini çözün)
+- Sunucu verimliliğini artırmak için SSL/TLS boşaltma(SSL'de handshaking maliyeti artırır ama reverse proxy bu maliyeti azaltır)
+- SSL iletişimlerini şifreleyin ve şifresini çözün
 - DDoS saldırılarını azaltma ve güvenliği artırma
 
 
