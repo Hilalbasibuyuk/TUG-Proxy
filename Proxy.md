@@ -57,7 +57,7 @@ Proxy sunucusu, güvenlik duvarı ve filtre işlevi görür. Son kullanıcı vey
 
 ### Forward proxy
 
-Forward proxy (aynı zamanda "proxy server" olarak da adlandırılır), istemci cihazları ile internet arasında bulunan bir sunucudur. Bir istemci bir web sitesine veya çevrimiçi kaynağa erişim isteği gönderdiğinde, istek önce ileri proxy'ye yönlendirilir. Proxy daha sonra isteği istemci adına hedef sunucuya iletir. Bir istek gönderildiğinde, "proxy server" bunu inceleyerek bağlantı kurmaya devam edip etmeyeceğine karar verir. Forward proxy, tek bir giriş noktasına ihtiyaç duyan dahili ağlar için en uygunudur. Ağdakiler için IP adresi güvenliği sağlar ve kolay yönetim kontrolüne olanak tanır. Ancak, forward proxy, bir kuruluşun bireysel son kullanıcıların ihtiyaçlarını karşılama yeteneğini sınırlayabilir.Gizliliği artırmak ve erişimi kontrol etmek için istemci adına hareket eder.
+Forward proxy (aynı zamanda "proxy server" olarak da adlandırılır), istemci cihazları ile internet arasında bulunan bir sunucudur. Bir istemci bir web sitesine veya çevrimiçi kaynağa erişim isteği gönderdiğinde, istek önce forward proxy'ye yönlendirilir. Proxy daha sonra isteği istemci adına hedef sunucuya iletir. Bir istek gönderildiğinde, "proxy server" bunu inceleyerek bağlantı kurmaya devam edip etmeyeceğine karar verir. Forward proxy, tek bir giriş noktasına ihtiyaç duyan dahili ağlar için en uygunudur. Ağdakiler için IP adresi güvenliği sağlar ve kolay yönetim kontrolüne olanak tanır. Ancak, forward proxy, bir kuruluşun bireysel son kullanıcıların ihtiyaçlarını karşılama yeteneğini sınırlayabilir.Gizliliği artırmak ve erişimi kontrol etmek için istemci adına hareket eder.
 
 
 ### Forward proxy kullanımı
@@ -113,6 +113,14 @@ Gelen ağ trafiğini birden fazla backend sunucusuna akıllıca dağıtan bir si
 
 - Yedeklilik ve Hata Toleransı: Sunuculardan biri çökerse, trafiği sağlıklı olan diğer sunuculara yönlendirerek uygulamanın kesintisiz çalışmasını sağlar.
 
+
+
+Yük dengeleme, günümüzün çok uygulamalı, çok cihazlı iş akışları tarafından oluşturulan çok sayıda istekle başa çıkması için en ölçeklenebilir yoldur. Günümüzün dijital işletmelerindeki birçok uygulamaya, dosyaya ve masaüstüne sorunsuz erişim sağlayan sistemlerle birlikte yük dengeleme, çalışanların daha tutarlı ve güvenilir bir son kullanıcı deneyimine sahip olmasına yardımcı olur. 
+
+
+
+
+Sunucular arasında hareket eden trafiği yönetmenin yanı sıra, bir global sunucu yük dengeleyici (GSLB) kullanarak çeşitli konumlardaki birden çok veri merkezini de yönetebilirsiniz.
 
 
 
@@ -197,3 +205,4 @@ https://www.fortinet.com/resources/cyberglossary/proxy-server
 https://www.youtube.com/watch?v=4NB0NDtOwIQ
 https://blog.bytebytego.com/p/ep25-proxy-vs-reverse-proxy
 https://konghq.com/blog/learning-center/what-is-an-api-gateway
+https://bulutistan.com/blog/load-balancer-yuk-dengeleyici-nedir/
