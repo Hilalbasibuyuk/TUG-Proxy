@@ -38,28 +38,70 @@ Proxy sunucusu, güvenlik duvarı ve filtre işlevi görür. Son kullanıcı vey
 - **Konuma özgü içeriğe erişim** : Başka bir ülkeyle ilişkili bir adrese sahip bir proxy sunucusu belirleyebilirsiniz. Böylece, o ülkedeymiş gibi görünebilir ve o ülkedeki bilgisayarların etkileşim kurmasına izin verilen tüm içeriğe tam erişim sağlayabilirsiniz. Örneğin, bu teknoloji, görünmek istediğiniz konumun yerel IP adreslerini kullanarak konum kısıtlamalı web sitelerini açmanıza olanak tanıyabilir.
 - **Çalışanların uygunsuz veya dikkat dağıtıcı sitelerde gezinmesini engelleyin** : Kuruluşunuzun ilkelerine aykırı web sitelerine erişimi engellemek için kullanabilirsiniz. Ayrıca, çalışanların önemli görevlerinden dikkatini dağıtan siteleri de engelleyebilirsiniz. Bazı kuruluşlar, zaman kaybına neden olan cazibeleri ortadan kaldırmak için Facebook ve benzeri sosyal medya sitelerini engeller.
 
+---
 
-
-### Proxy sunucu türleri
-
+## Proxy sunucu türleri
 
 <img width="862" height="512" alt="image" src="https://github.com/user-attachments/assets/dc2eb010-00be-4797-ab79-f1281e7bd7f3" />
 
+## Forward ve Reverse Proxy
+
+
+<img width="799" height="846" alt="image" src="https://github.com/user-attachments/assets/5eefbfc2-5c66-444e-9b48-1c938e77a2b1" />
+
+
+### Başka bir örnek fotoğraf
+
+<img width="999" height="496" alt="image" src="https://github.com/user-attachments/assets/a505e533-590a-484c-8780-67743acef734" />
+
+
+### Forward proxy
+
+Forward proxy (aynı zamanda "proxy sunucusu" olarak da adlandırılır), istemci cihazları ile internet arasında bulunan bir sunucudur. Bir istemci bir web sitesine veya çevrimiçi kaynağa erişim isteği gönderdiğinde, istek önce ileri proxy'ye yönlendirilir. Proxy daha sonra isteği istemci adına hedef sunucuya iletir. Gizliliği artırmak ve erişimi kontrol etmek için istemci adına hareket eder.
+
+
+### Forward proxy kullanımı
+
+- Müşteri anonimliğini artırma
+- Coğrafi olarak engellenen veya kısıtlanan içeriğe erişim
+- Kuruluşlarda içerik filtreleme ve izleme
+- Önbelleğe alma yoluyla bant genişliği tüketimini azaltma
+- Uyumluluk için kullanıcı etkinliğinin kaydedilmesi ve izlenmesi
 
 
 
+### Reverse proxy
+
+Forward proxy istemci adına hareket ederken, reverse proxy sunucu adına hareket eder. İstemcilerin kaynak sunucuyla doğrudan iletişim kurmasını engelleyerek sunucuları korumak ve yönetmek için kullanılır. Performansı ve güvenliği optimize etmek için sunucu adına hareket eder.
 
 
 
+### Reverse proxy kullanımı
+
+- Birden fazla web sunucusunda yük dengeleme
+- Sunucu performansını iyileştirmek için içeriği önbelleğe alma
+- Arka uç sunucularının internete doğrudan maruz kalmasının önlenmesi
+- Sunucu verimliliğini artırmak için SSL/TLS boşaltma
+- DDoS saldırılarını azaltma ve güvenliği artırma
 
 
+## Forward Proxy ve Reverse Proxy arasındaki farklar
 
-
-
-
-
+| Özellik | Forward Proxy | Reverse Proxy |
+|---------|-------------|------------|
+| Amaç | Müşteri adına erişimi kontrol etmek ve gizliliği artırmak için hareket eder. | Performansı optimize etmek ve güvenliği artırmak için sunucu adına hareket eder. |
+| Konum | Müşteri ile internet arasında yer alır. | İnternet ile sunucu arasında bulunur. |
+| İstemci Görünürlüğü | İstemci proxy'nin farkındadır ve onu yapılandırması gerekir. | Müşteri genellikle proxy'nin varlığından habersizdir. |
+| Yapılandırma | İstemcinin proxy'yi kullanabilmesi için cihazını yapılandırması gerekir. | Sunucu ters proxy kullanacak şekilde yapılandırılmıştır. |
+| Kullanım Alanları | İçerik filtrelerini aşma, erişimi kontrol etme, gizliliği artırma. | Yük dengeleme, önbellekleme, DDoS koruması, SSL boşaltma. |
+| İstek Yönlendirme | İstemciden internete gelen istekleri yakalar ve iletir. | İnternetten gelen istekleri yakalar ve bunları ilgili sunucuya iletir. |
+| Önbellekleme | Yanıt sürelerini iyileştirmek için istemci tarafındaki içerikleri önbelleğe alabilir. | Yükü azaltmak ve içerik dağıtımını hızlandırmak için sunucu yanıtlarını önbelleğe alabilir. |
+| SSL/TLS | Genellikle SSL/TLS şifrelemesini işlemez. | Sunucu için şifreleme/şifre çözme görevlerini kolaylaştırarak SSL/TLS boşaltma işlemini gerçekleştirebilir. |
 
 
 ### KAYNAKÇA
 https://www.geeksforgeeks.org/system-design/difference-between-forward-proxy-and-reverse-proxy/
 https://www.fortinet.com/resources/cyberglossary/proxy-server
+https://www.youtube.com/watch?v=4NB0NDtOwIQ
+https://blog.bytebytego.com/p/ep25-proxy-vs-reverse-proxy
+
