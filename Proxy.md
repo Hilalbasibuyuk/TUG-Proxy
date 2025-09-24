@@ -1,4 +1,4 @@
-# TUG-Proxy
+# TUG-Proxy-Reverse/Forward Proxy-Load Balancer-API Gateway-Traefik
 
 ## Proxy Nedir
 
