@@ -38,6 +38,21 @@ Proxy sunucusu, güvenlik duvarı ve filtre işlevi görür. Son kullanıcı vey
 - **Konuma özgü içeriğe erişim** : Başka bir ülkeyle ilişkili bir adrese sahip bir proxy sunucusu belirleyebilirsiniz. Böylece, o ülkedeymiş gibi görünebilir ve o ülkedeki bilgisayarların etkileşim kurmasına izin verilen tüm içeriğe tam erişim sağlayabilirsiniz. Örneğin, bu teknoloji, görünmek istediğiniz konumun yerel IP adreslerini kullanarak konum kısıtlamalı web sitelerini açmanıza olanak tanıyabilir.
 - **Çalışanların uygunsuz veya dikkat dağıtıcı sitelerde gezinmesini engelleyin** : Kuruluşunuzun ilkelerine aykırı web sitelerine erişimi engellemek için kullanabilirsiniz. Ayrıca, çalışanların önemli görevlerinden dikkatini dağıtan siteleri de engelleyebilirsiniz. Bazı kuruluşlar, zaman kaybına neden olan cazibeleri ortadan kaldırmak için Facebook ve benzeri sosyal medya sitelerini engeller.
 
+
+### Proxy Ayarları Nedir? Nasıl Yapılır?
+Proxy ayarları, internete bağlanırken kullanacağınız proxy sunucusunun detaylarını belirlemeye yarar. Ayarlar, farklı işletim sistemlerine ve tarayıcılara göre değişiklik gösterebilir. İşte temel adımlar:
+
+Windows İşletim Sistemi için:
+
+- Kontrol Paneli'ni açın.
+- Ağ ve İnternet seçeneğine gidin.
+- İnternet Seçenekleri'ni tıklayın.
+- Bir pencere açılacak, burada Bağlantılar sekmesine gidin.
+- Yerel Ağ Ayarları'nı tıklayın.
+- Proxy sunucusu bölümünde gerekli IP adresini ve port numarasını girin.
+- Tamam'ı tıklayarak ayarları kaydedin.
+
+
 ---
 
 ## Proxy sunucu türleri
