@@ -200,6 +200,14 @@ API Gateway, istemciler (mobil uygulama, web app, IoT cihazları vb.) ile arka u
 <img width="874" height="575" alt="image" src="https://github.com/user-attachments/assets/b078fbd9-4f8b-416d-8ad8-d92abdcdd784" />
 
 
+### Load Balancing & Filtering
+Uygulamamıza gelen isteklerin performans sorunu yaratmaması ve yüksek erişilebilirlik değerleri için load balancing yani yük dağılımı yapmak isteyebiliriz. API gateway load balancing yapmak için de uygun bir noktadır. Servislerimizin önünde konumlanan API gateway, gelen istekleri alır ve bu istekleri belirlenen yönlendirme kurallarına göre hedef servislere yönlendirir. Ayrıca servis erişimleri için belirli IP adreslerine izin vermek veya bazı IP adreslerini kara listeye almak isteyebiliriz. API gateway bu filtrelemeyi yapmak için IP tabanlı erişim kontrolü sağlar. Bu sayede, belirli bir IP adresinden gelen istekleri kabul etmek veya reddetmek için API gateway üzerinde gerekli konfigürasyonlar yapılabilir. Bu filtreleme mekanizması, güvenlik politikalarını uygulamak ve istenmeyen erişimleri engellemek için önemli bir araçtır.
+
+
+
+
+
+
 ### Örnek API Gateway’ler:
 - Kong, NGINX, AWS API Gateway, Traefik, Istio (Service Mesh içinde)
 
@@ -228,11 +236,6 @@ API Gateway, istemciler (mobil uygulama, web app, IoT cihazları vb.) ile arka u
 - Observability → Monitoring (Prometheus, Grafana entegrasyonu)
 
 - Middlewares → Rate limiting, authentication, redirect, retry gibi ekstra işlemler
-
-
-### Load Balancing & Filtering
-Uygulamamıza gelen isteklerin performans sorunu yaratmaması ve yüksek erişilebilirlik değerleri için load balancing yani yük dağılımı yapmak isteyebiliriz. API gateway load balancing yapmak için de uygun bir noktadır. Servislerimizin önünde konumlanan API gateway, gelen istekleri alır ve bu istekleri belirlenen yönlendirme kurallarına göre hedef servislere yönlendirir. Ayrıca servis erişimleri için belirli IP adreslerine izin vermek veya bazı IP adreslerini kara listeye almak isteyebiliriz. API gateway bu filtrelemeyi yapmak için IP tabanlı erişim kontrolü sağlar. Bu sayede, belirli bir IP adresinden gelen istekleri kabul etmek veya reddetmek için API gateway üzerinde gerekli konfigürasyonlar yapılabilir. Bu filtreleme mekanizması, güvenlik politikalarını uygulamak ve istenmeyen erişimleri engellemek için önemli bir araçtır.
-
 
 
 
