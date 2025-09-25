@@ -261,6 +261,40 @@ Uygulamamıza gelen isteklerin performans sorunu yaratmaması ve yüksek erişil
 
 - Traefik: Bu restoran için özelleşmiş, hem kapıcılık hem hosteslik hem de garson şefliği yapabilen çok yetenekli ve modern bir eleman.
 
+---
+
+## CDN(Content Delivery Network)
+
+- **Amaç**: Statik içerikleri (resim, CSS, JS, video vb.) kullanıcılara daha hızlı ulaştırmak.
+- **Nasıl çalışır**: İçerik, dünya genelindeki cache sunucularına (edge servers) kopyalanır. Kullanıcı isteği, en yakın edge sunucuya yönlendirilir. Böylece origin sunucuya giden trafik azalır ve gecikme (latency) düşer.
+- **Avantajları**:Daha hızlı yükleme, origin sunucu yükünün azalması, DDoS ve trafik patlamalarına karşı koruma, global erişimde tutarlılık.
+
+
+---
+
+
+## Nginx
+
+- **Amaç**: Web sunucusu, reverse proxy, load balancer veya cache olarak kullanılabilir.
+- **Özellikleri**: **Reverse proxy**: Trafiği backend sunuculara yönlendirir, SSL offloading yapabilir, caching sağlar. **Load balancing**: Trafiği birden fazla backend sunucuya dağıtır (round-robin, least connections gibi). **Statik içerik sunma**: Çok hızlıdır ve düşük kaynak kullanır. **Caching ve rate limiting**: Performans ve güvenlik iyileştirmeleri sağlar.
+
+
+
+---
+
+
+## Service Discovery (Consul örneği)
+
+- **Amaç**: Mikroservis mimarisinde servislerin birbirini bulmasını sağlamak.
+- **Problem**: Backend servisleri dinamik IP’ler ve portlar ile çalışır; statik IP ile ulaşmak zor.
+- **Consul nasıl çözer**:Servisler Consul’a kaydolur (service registration).Diğer servisler, Consul’dan servis IP/port bilgisini alır (service discovery).Health check ile servislerin sağlıklı olup olmadığı sürekli kontrol edilir.
+- **Avantajları**: Mikroservisler arası esnek ve dinamik iletişim. Yüksek erişilebilirlik ve failover yönetimi. Merkezi yönetim ve monitoring kolaylığı.
+
+
+### NOT: Nginx + CDN + Consul kombinasyonu, modern web uygulamalarında yük dağıtımı, güvenlik, performans ve servis yönetimini birlikte sağlar.
+
+
+
 
 
 ### KAYNAKÇA
