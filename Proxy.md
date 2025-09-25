@@ -210,8 +210,6 @@ Uygulamamıza gelen isteklerin performans sorunu yaratmaması ve yüksek erişil
 
 
 
-
-
 ### Örnek API Gateway’ler:
 - Kong, NGINX, AWS API Gateway, Traefik, Istio (Service Mesh içinde)
 ---
@@ -280,10 +278,55 @@ Uygulamamıza gelen isteklerin performans sorunu yaratmaması ve yüksek erişil
 ---
 
 ## CDN(Content Delivery Network)
+İçerik dağıtım ağı (CDN), içerikleri son kullanıcılara yakın bir yerde önbelleğe alan, coğrafi olarak dağıtılmış bir sunucu grubudur. CDN, HTML sayfaları, JavaScript dosyaları, stil sayfaları, resimler ve videolar dahil olmak üzere İnternet içeriğinin yüklenmesi için gereken varlıkların hızlı bir şekilde aktarılmasını sağlar. CDN servislerinin popülaritesi giderek artıyor ve bugün web trafiğinin büyük çoğunluğu, Facebook, Netflix ve Amazon gibi büyük sitelerden gelen trafik de dahil olmak üzere, CDN'ler aracılığıyla sağlanıyor. CDN sunucularına genellikle "edge servers"(uç sunucu) denir.
+
+<img width="890" height="648" alt="image" src="https://github.com/user-attachments/assets/6adc18af-236a-4fc4-b56e-968f2e23904e" />
+
+
+
+
+
+Resim kaynakçası -> https://www.researchgate.net/figure/High-level-understanding-of-Content-Delivery-Networks_fig2_321791733
+
+- Doğru şekilde yapılandırılmış bir CDN, web sitelerini Dağıtılmış Hizmet Reddi (DDOS) saldırıları gibi bazı yaygın kötü amaçlı saldırılara karşı korumaya da yardımcı olabilir. 
+- Dağıtık yapıları sayesinde bir CDN, birçok kaynak sunucudan daha fazla trafiği yönetebilir ve donanım arızalarına daha iyi dayanabilir.
+
+
+### CDN'ler nasıl çalışır?
+
+Örneğin, web sitenizin Birleşik Krallık'taki (BK) bir kaynak sunucuda bulunduğunu varsayalım. Amerika Birleşik Devletleri'nden (ABD) biri sitenize erişirse, CDN bu kullanıcıya, web sayfası için Birleşik Krallık'taki kaynak sunucunuz yerine, kullanıcıya daha yakın olan ABD'deki bir uç sunucudan hizmet verir. Bu uç sunucu, kullanıcılar ve internet arasında bir ağ geçidi görevi gören bir tür proxy sunucusudur (bazen önbellek veya önbellekleme sunucusu olarak da adlandırılır).
+
+
+
+### Bir CDN iki tür içerik sunabilir: statik ve dinamik.
+
+
+- **Statik içerik** , bir web sitesinde sabit kalan çevrimiçi içeriktir . Siteyi ziyaret eden tüm kullanıcılar için aynı kalır. Web sitesi logoları ve HTML ile yazılmış marka bilgileri gibi içerikler statik içerik örnekleridir.
+- **Dinamik içerik** , kullanıcı davranışına, konuma veya diğer faktörlere bağlı olarak değişen çevrimiçi içeriktir. Örneğin, sosyal medya akışları (Instagram, Facebook ve daha fazlası), yayın platformları (Netflix, Hulu ve diğerleri) ve e-ticaret siteleri (Amazon gibi), her kullanıcıya özel ve kişiselleştirilmiş, medya açısından zengin dinamik içerikler sunar.
+ 
+
+---
 
 - **Amaç**: Statik içerikleri (resim, CSS, JS, video vb.) kullanıcılara daha hızlı ulaştırmak.
 - **Nasıl çalışır**: İçerik, dünya genelindeki cache sunucularına (edge servers) kopyalanır. Kullanıcı isteği, en yakın edge sunucuya yönlendirilir. Böylece origin sunucuya giden trafik azalır ve gecikme (latency) düşer.
-- **Avantajları**:Daha hızlı yükleme, origin sunucu yükünün azalması, DDoS ve trafik patlamalarına karşı koruma, global erişimde tutarlılık.
+- **Avantajları**:Daha hızlı yükleme. Origin sunucu yükünün azalması. DDoS ve trafik patlamalarına karşı koruma. Global erişimde tutarlılık. Daha iyi arama motoru optimizasyonu (SEO) sıralamaları. 
+
+
+---
+## CDN bileşenleri ve ilgili teknolojiler
+
+
+### Alan adı sistemi (DNS) sunucusu
+DNS , kullanıcıların IP adresleri yerine alan adları ve URL'ler kullanarak web sitelerine erişmelerini sağlayan standart internet protokolünün bir parçasıdır. DNS, internetin rehberidir; web tarayıcıları aracılığıyla belirli web sitelerini arama sürecini basitleştirir. İçerik dağıtım ağları (CDN'ler), kaynak ve uç sunucular için IP adreslerini takip etmek ve sağlamak ve dinamik istek yönlendirmesi gerçekleştirmek için DNS kullanır.
+
+### Varlık noktası (PoP)
+Varlık noktası, sunucuları ve yönlendiricileri dünya çapında farklı bölgelerde depolayan fiziksel bir konumdur. Optimum bağlantı ve performans sağlamak için stratejik olarak yerleştirilirler ve genellikle yüksek kullanıcı yoğunluğuna sahip veya birden fazla ağ yolunun kesiştiği alanlara yerleştirilirler.
+
+### İnternet değişim noktası (IXP)
+IXP, internet servis sağlayıcılarının ve CDN'lerin bağlandığı fiziksel bir konumdur.
+
+### Uygulama dağıtım denetleyicisi (ADC)
+ADC, genellikle bir uygulama dağıtım ağının (ADN) parçası olarak, uygulamaların internet üzerinden dağıtımını optimize etmek için kullanılan bir ağ cihazıdır. Büyük ölçekli, karmaşık veya dağıtılmış bir içerik dağıtım ağı (CDN) işleten bir kuruluş, hızı daha da artırmak ve performansı optimize etmek için ADC'leri de kullanabilir .
 
 
 ---
@@ -293,6 +336,8 @@ Uygulamamıza gelen isteklerin performans sorunu yaratmaması ve yüksek erişil
 
 - **Amaç**: Web sunucusu, reverse proxy, load balancer veya cache olarak kullanılabilir.
 - **Özellikleri**: **Reverse proxy**: Trafiği backend sunuculara yönlendirir, SSL offloading yapabilir, caching sağlar. **Load balancing**: Trafiği birden fazla backend sunucuya dağıtır (round-robin, least connections gibi). **Statik içerik sunma**: Çok hızlıdır ve düşük kaynak kullanır. **Caching ve rate limiting**: Performans ve güvenlik iyileştirmeleri sağlar.
+
+
 
 
 
@@ -320,3 +365,5 @@ https://www.youtube.com/watch?v=4NB0NDtOwIQ
 https://blog.bytebytego.com/p/ep25-proxy-vs-reverse-proxy
 https://konghq.com/blog/learning-center/what-is-an-api-gateway
 https://bulutistan.com/blog/load-balancer-yuk-dengeleyici-nedir/
+https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
+https://www.ibm.com/think/topics/content-delivery-networks
