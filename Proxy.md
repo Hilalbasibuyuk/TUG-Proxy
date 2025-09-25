@@ -562,6 +562,6 @@ https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
 https://www.ibm.com/think/topics/content-delivery-networks
 https://medium.com/@aedemirsen/nginx-nedir-nginx-ile-bir-web-sayfas%C4%B1-nas%C4%B1l-sunulur-670eefadd047
 https://kinsta.com/blog/what-is-nginx/
-https://docs.nginx.com/nginx-agent/overview/   -> Nginx Agent
+https://docs.nginx.com/nginx-agent/overview/ 
 https://medium.com/i%CC%87yi-programlama/microservice-mimarilerinde-service-discovery-7a6ebceb1b2a
 https://gokhan-gokalp.com/microservice-mimarilerinde-consul-ile-service-discovery/
