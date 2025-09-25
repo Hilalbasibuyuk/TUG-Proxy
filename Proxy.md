@@ -337,7 +337,11 @@ ADC, genellikle bir uygulama dağıtım ağının (ADN) parçası olarak, uygula
 - **Amaç**: Web sunucusu, reverse proxy, load balancer veya cache olarak kullanılabilir.
 - **Özellikleri**: **Reverse proxy**: Trafiği backend sunuculara yönlendirir, SSL offloading yapabilir, caching sağlar. **Load balancing**: Trafiği birden fazla backend sunucuya dağıtır (round-robin, least connections gibi). **Statik içerik sunma**: Çok hızlıdır ve düşük kaynak kullanır. **Caching ve rate limiting**: Performans ve güvenlik iyileştirmeleri sağlar.
 
+<img width="936" height="614" alt="image" src="https://github.com/user-attachments/assets/d249e239-815e-4427-b054-640f96271406" />
 
+
+
+Resim kaynakçası -> https://www.freecodecamp.org/news/an-introduction-to-nginx-for-developers-62179b6a458f/
 
 
 
