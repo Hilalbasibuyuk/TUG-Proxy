@@ -555,16 +555,35 @@ Resim kaynakçası -> https://medium.com/i%CC%87yi-programlama/microservice-mima
 ## Consul
 
 
-Consul, kapsamlı bir service discovery aracıdır. Öncelikle consul’ün mimarisine biraz değinecek olursak consistency için server node’larında Raft consensus‘u kullanmaktadır. Raft consensus, Paxos temelli bir consensus algoritmasıdır.
+Consul, kapsamlı bir service discovery aracıdır. Öncelikle consul’ün mimarisine biraz değinecek olursak consistency için server node’larında Raft consensus‘u kullanmaktadır. Raft consensus, Paxos temelli bir consensus algoritmasıdır. Paxos’a göre daha basit ve anlaşılabilir bir algoritma olarak tasarlanmıştır. Consul ise Raft’ı, node’lar arasındaki consistency durumunu veya leader election’ı sağlayabilmek için kullanmaktadır.
 
 
+- Örnek vermek gerekirse: 3 adet server node’u olduğunu düşünelim. Bu node’lar aralarındaki consistency’i sağlayabilmek için leader node, aşağıdaki gibi diğer node’lara bir heartbeat göndermektedir.
 
 
+<img width="871" height="590" alt="image" src="https://github.com/user-attachments/assets/ddc0008e-6249-4dcf-9eee-12e41f9286ee" />
+Resim kaynakçası -> https://gokhan-gokalp.com/microservice-mimarilerinde-consul-ile-service-discovery/
+
+Eğer bu heartbeat timeout’a uğrar ise, x node’undan birtanesi yeni bir election(oylama) başlatacaktır. Bu election ise node’lar arasından hangisinin yeni leader olacağına karar verilebilmesi için yapılmaktadır. Bu işlemin gerçekleşebilmesi için ise election’ı başlatan node, aşağıdaki gibi diğer node’lardan leader olabilmek için oy istemektedir.
+
+<img width="814" height="572" alt="image" src="https://github.com/user-attachments/assets/95900c17-d7a7-4806-8629-a96e849367f3" />
+Resim kaynakçası -> https://gokhan-gokalp.com/microservice-mimarilerinde-consul-ile-service-discovery/
 
 
+Diğer node’lardan gerekli oyu alabilirse eğer, leader olarak seçilmektedir. Bu oy isteme işlemine ise “Quorum” denmektedir ve bu işlem için (n/2)+1 kadar üye gerekmektedir. 
 
 
+Consul’ün diğer bazı architectural detaylarına baktığımızda ise:
 
+- Etkileşim için bir REST endpoint’i sunmaktadır
+- Dynamic load balancing işlemini gerçekleştirebilmektedir
+- Multiple datacenter desteği vardır
+- In-built olarak kapsamlı bir service health checking sağlamaktadır
+- Service database’i için, distributed key-value store’a sahiptir
+
+Bunlara ek olarak consul, highly fault tolerant‘a sahiptir. Tüm Consul service cluster’ı down olduğunda dahi, bu durum service discovery işlemini durdurmayacaktır. Bu işlemi ise Consul, Serf ile sağlamaktadır. Serf, tamamen bir Gossip protokol’ü olup bir nevi node orchestration tool’udur. Serf membershipment’ı yönetmek, failure detection ve event broadcasting yapabilme işlemlerini sağlayabilmektedir.
+
+- Consul'a bir bütün olarak baktığımızda ise altyapımızdaki service’leri discovery edebilmemiz ve configuring işlemlerini yapabilmemiz için geliştirilmiş bir tool’dur diyebiliriz.
 
 ### NOT: Nginx + CDN + Consul kombinasyonu, modern web uygulamalarında yük dağıtımı, güvenlik, performans ve servis yönetimini birlikte sağlar.
 
