@@ -470,15 +470,84 @@ NGINX Agent, NGINX çalıştıran bir sistemde yardımcı bir işlem olarak çal
 
 ## Service Discovery (Consul örneği)
 
+Service Discovery’nin amacı, dinamik ve değişken ortamlarda microservice’lerin birbirlerini bulmasını ve iletişim kurmasını sağlamaktır. Mikroservisler sürekli olarak ölçeklenir, taşınır veya yeniden başlatılır; bu nedenle, servislerin sabit adresleri yoktur. Service Discovery, bu dinamikliği yönetmek için kullanılır.
+
+
+### Nerelerde ve Ne İçin Kullanılır?
+Service Discovery, büyük ve karmaşık sistemlerde, özellikle de microservice mimarilerinde kullanılır. İşte bazı kullanım alanları:
+
+- Dinamik Ölçekleme: Servisler dinamik olarak ölçeklendiğinde, yeni servis örnekleri otomatik olarak keşfedilir ve yük dengelemesi yapılır.
+- Kapsayıcı Orkestrasyonu: Docker ve Kubernetes gibi ortamlar, servislerin otomatik olarak keşfedilmesi ve yönetilmesi için Service Discovery kullanır.
+- Otomatik Yeniden Başlatma: Servisler yeniden başlatıldığında, yeni adresler Service Discovery mekanizmaları ile güncellenir.
+
+
+
+Servis kayıt sistemleri, dinamik yönetim ve esneklik sağlayarak servis adreslerindeki değişikliklere hızlı uyum göstermeyi kolaylaştırır. Ayrıca merkezi yönetim sayesinde servislerin kontrolü basitleşir. Ancak bu yaklaşım, kurulum ve yönetimde karmaşıklık yaratabilir, merkezi yapının çökmesi durumunda tek nokta hatası riski taşır ve servis kaydediciye yapılan her isteğin ek performans yükü oluşturması dezavantajdır.
+
+<img width="602" height="448" alt="image" src="https://github.com/user-attachments/assets/99f2a7f3-831d-40ed-b5ab-92f7b8a617da" />
+
+
+
+Resim kaynakçası -> https://www.linkedin.com/pulse/service-discovery-nedir-ve-neden-%C3%B6nemlidir-burak-ka%C5%9F%C4%B1kc%C4%B1-yhuzf/
+
+
 - **Amaç**: Mikroservis mimarisinde servislerin birbirini bulmasını sağlamak.
 - **Problem**: Backend servisleri dinamik IP’ler ve portlar ile çalışır; statik IP ile ulaşmak zor.
 - **Consul nasıl çözer**:Servisler Consul’a kaydolur (service registration).Diğer servisler, Consul’dan servis IP/port bilgisini alır (service discovery).Health check ile servislerin sağlıklı olup olmadığı sürekli kontrol edilir.
 - **Avantajları**: Mikroservisler arası esnek ve dinamik iletişim. Yüksek erişilebilirlik ve failover yönetimi. Merkezi yönetim ve monitoring kolaylığı.
 
 
+2 tür service discovery patterni bulunmakta.Client-Side Service Discovery ve Server-Side Service Discovery.
+
+
+### Client-Side Service Discovery
+
+Bu yapıda client service registry ile iletişime geçer ve istediği domainin adresini sorar.Service registry üzerinde kayıtlı olan yani ulaşılabilir durumdaki microservice instance’larının ip adreslerini verir.Daha sonra client bir load-balancing algoritmasına göre bu microservicelerden en uygun olanı seçer ve microservice ile iletişim kurar.Gördüğünüz gibi burada client,ip adresini elde ederek microservice ile kendisi iletişim kurmaktadır.
+
+
+<img width="692" height="655" alt="image" src="https://github.com/user-attachments/assets/cb03cc2f-b716-4bd2-8ada-f43728fc7084" />
+
+Resim kaynakçası -> https://medium.com/i%CC%87yi-programlama/microservice-mimarilerinde-service-discovery-7a6ebceb1b2a
+
+
+### Server-Side Service Discovery
+
+Burada ise client bir Load Balancer(Yük Dengeleyici) ile iletişim kurar.İsteğini buraya iletir.Load Balancer ise Service Registry ile konuşarak avaliable durumdaki instance’ların listesini alır.Daha sonra da arasından kendi algoritmasına göre en uygun gördüğü instance’a client’tan aldığı isteği yönlendirir.
+
+
+
+<img width="686" height="441" alt="image" src="https://github.com/user-attachments/assets/03c21d9d-495e-4e64-92c4-c315c3da97b8" />
+
+
+
+Resim kaynakçası -> https://medium.com/i%CC%87yi-programlama/microservice-mimarilerinde-service-discovery-7a6ebceb1b2a
+
+
+İkisinin arasındaki fark Client-Side Service Discovery yapısında client,instance ile kendisi iletişim kurmaktadır.Çünkü o instance’ın ip adres bilgisini service registry’e sorarak öğrenmektedir.Server-Side Service Discovery örneğinde ise request load balancer aracılığı ile instancelara iletilmektedir.
+
+
+### Service Discovery Teknolojileri
+
+- **Eureka (Spring Cloud Netflix**) : Merkezi servis kaydı ve keşfi sağlar. Özellikle Spring Boot uygulamaları ile uyumlu çalışır.
+- **Consul** : Hizmet kaydı ve keşfi, konfigürasyon yönetimi ve sağlık kontrolleri sağlar.
+- **Zookeeper** : Koordinasyon, servis keşfi ve senkronizasyon sağlar.
+
+
+## Consul
+
+
+Consul, kapsamlı bir service discovery aracıdır. Öncelikle consul’ün mimarisine biraz değinecek olursak consistency için server node’larında Raft consensus‘u kullanmaktadır. Raft consensus, Paxos temelli bir consensus algoritmasıdır.
+
+
+
+
+
+
+
+
+
+
 ### NOT: Nginx + CDN + Consul kombinasyonu, modern web uygulamalarında yük dağıtımı, güvenlik, performans ve servis yönetimini birlikte sağlar.
-
-
 
 
 
@@ -494,3 +563,5 @@ https://www.ibm.com/think/topics/content-delivery-networks
 https://medium.com/@aedemirsen/nginx-nedir-nginx-ile-bir-web-sayfas%C4%B1-nas%C4%B1l-sunulur-670eefadd047
 https://kinsta.com/blog/what-is-nginx/
 https://docs.nginx.com/nginx-agent/overview/   -> Nginx Agent
+https://medium.com/i%CC%87yi-programlama/microservice-mimarilerinde-service-discovery-7a6ebceb1b2a
+https://gokhan-gokalp.com/microservice-mimarilerinde-consul-ile-service-discovery/
