@@ -214,6 +214,18 @@ Uygulamamıza gelen isteklerin performans sorunu yaratmaması ve yüksek erişil
 
 ### Örnek API Gateway’ler:
 - Kong, NGINX, AWS API Gateway, Traefik, Istio (Service Mesh içinde)
+---
+
+- Kong – Açık kaynak + ücretli (Enterprise sürümü mevcut)
+
+- NGINX – Açık kaynak (NGINX Open Source) + ücretli (NGINX Plus)
+
+- AWS API Gateway – Tamamen ücretli, AWS hizmeti
+
+- Traefik – Açık kaynak + ücretli (Traefik Enterprise)
+
+- Istio (Service Mesh içinde) – Açık kayna
+
 
 ---
 
