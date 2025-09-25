@@ -473,6 +473,25 @@ NGINX Agent, NGINX çalıştıran bir sistemde yardımcı bir işlem olarak çal
 Service Discovery’nin amacı, dinamik ve değişken ortamlarda microservice’lerin birbirlerini bulmasını ve iletişim kurmasını sağlamaktır. Mikroservisler sürekli olarak ölçeklenir, taşınır veya yeniden başlatılır; bu nedenle, servislerin sabit adresleri yoktur. Service Discovery, bu dinamikliği yönetmek için kullanılır.
 
 
+
+<img width="774" height="779" alt="image" src="https://github.com/user-attachments/assets/4fee23fc-72f2-44d8-96b3-ee97ebe846ec" />
+
+
+
+Resim kaynakçası -> https://gokhan-gokalp.com/microservice-mimarilerinde-consul-ile-service-discovery/
+
+
+Yukarıdaki yapıya baktığımızda, auto scale olan ve dynamic olarak değişen instance’lara sahip bir yapıyı görüyoruz. Burada dikkat edersek IP adresleri de dynamic olarak assign edilmektedir. Bu gibi dynamic case’ler karşısında, client hangi IP adresine istek atacağını bilemeyecektir. Service discovery ise bu gibi durumları nasıl otomatik olarak handle edebilirize odaklanmaktadır.
+
+
+Service discovery  temel olarak üç kavram üzerinde durmaktadır:
+
+- Discovery: Service’lerin dynamic bir ortamda cluster içerisindeki diğer service’ler ile iletişim kurabilmeleri için, birbirlerinin IP ve port bilgilerini bulmaya ihtiyaçları vardır. Discovery ise bunu sağlamaktadır.
+- Health check: Health check işlemi ile sadece up olan service’lerin sistemde kalmaları, down olan’ların ise dynamic bir şekilde sistem dışı kalmaları sağlanmaktadır.
+- Load balancing: Hepimizin de bildiği gibi bir hizmete gelmiş olan request’in, bu hizmeti sağlayan diğer instance’lara da dynamic olarak dağıtılmasını sağlamaktır.
+
+
+
 ### Nerelerde ve Ne İçin Kullanılır?
 Service Discovery, büyük ve karmaşık sistemlerde, özellikle de microservice mimarilerinde kullanılır. İşte bazı kullanım alanları:
 
