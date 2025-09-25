@@ -333,6 +333,14 @@ ADC, genellikle bir uygulama dağıtım ağının (ADN) parçası olarak, uygula
 
 
 ## Nginx
+Nginx en kısa şekli ile açık kaynak olarak tasarlanmış bir ‘web server’ yazılımıdır. Odaklandığı noktalar ise en yüksek performans ve stabil davranışı, en basit ve küçük boyutlu bir şekilde kullanıcılara sunmasıdır. Yani Nginx , düşük bellek kullanımı ve yüksek eşzamanlılık sunmak üzere tasarlanmıştır. Her web isteği için yeni süreçler oluşturmak yerine, isteklerin tek bir iş parçacığında işlendiği eşzamansız, olay odaklı bir yaklaşım kullanır. Nginx Unix tabanlı işletim sistemlerinde çalışmaktadır, Windows makinelerde kısıtlı desteği bulunmaktadır.
+
+
+
+Nginx ile tek bir ana işlem birden fazla çalışan işlemi kontrol edebilir. Ana işlem çalışan işlemleri yönetirken, çalışanlar asıl işlemi gerçekleştirir. Nginx eşzamansız olduğundan, her istek çalışan tarafından diğer istekleri engellemeden eş zamanlı olarak yürütülebilir.
+
+
+
 
 - **Amaç**: Web sunucusu, reverse proxy, load balancer veya cache olarak kullanılabilir.
 - **Özellikleri**: **Reverse proxy**: Trafiği backend sunuculara yönlendirir, SSL offloading yapabilir, caching sağlar. **Load balancing**: Trafiği birden fazla backend sunucuya dağıtır (round-robin, least connections gibi). **Statik içerik sunma**: Çok hızlıdır ve düşük kaynak kullanır. **Caching ve rate limiting**: Performans ve güvenlik iyileştirmeleri sağlar.
@@ -342,6 +350,118 @@ ADC, genellikle bir uygulama dağıtım ağının (ADN) parçası olarak, uygula
 
 
 Resim kaynakçası -> https://www.freecodecamp.org/news/an-introduction-to-nginx-for-developers-62179b6a458f/
+
+
+
+- Alternatifi ise Apache'dir. Apache, bir diğer popüler açık kaynaklı web sunucusudur. Ham veriler açısından, Apache mevcut en popüler web sunucusudur. Fakat Apache genel olarak en popüler seçenek olsa da, Nginx aslında yüksek trafikli web siteleri arasında en popüler web sunucusudur. Apache'nin kullanımı, bir sitenin trafiği arttıkça ters yönde hareket eder.
+
+
+
+
+### Kurulum için:
+
+```bash
+sudo apt-get updatesudo apt-get install nginx
+```
+
+
+**nginx.conf**: Çekirdek ayarlar burada; üst düzey bağlamlar events ve http. HTTP bağlamı altında iç içe sunucu ve konum blokları yer alır. Bu dosya yapılandırılarak yandaki dosya yollarına yerleştirilir:  /usr/local/nginx/conf, /etc/nginx, /usr/local/etc/nginx 
+
+
+### Basit bir configuration dosyası:
+
+```bash
+server {
+  listen 80;
+  include etc/nginx/mime.types;
+  location /{
+    root /usr/share/nginx/html/;
+  }
+}
+```
+
+- **listen** → Server’in hangi port üzerinden yayın yapacağını belirten config. Bizim durumumuzda container içerisinde hangi port üzerinden ulaşılacağını belirtiyor.
+
+- **include** → Web servisimizin istemcilere sunabileceği tüm tipleri belirttiğimiz mime.types dosyasını dahil ediyoruz. Bu dosya hali hazırda kullandığımız Nginx imajında belirtilen dizinde mevcut olduğunu için kendimiz oluşturmadık. Örnek bir içeriğe buradan ulaşabilirsiniz. Yada benzer formatta kendiniz oluşturabilirsiniz.
+
+- **location** → Server çalıştığında hangi konumu referans alacağını burada belirtiyoruz. Burada location ibaresinden sonra bir endpoint belirleyebiliriz.
+
+- **root** → Web sayfasının kaynak kodlarının bulunduğu dosya yolunu belirtiyoruz. Nginx container içerisinde bu konum /usr/share/nginx/html olarak belirlenmiş. Fakat biz farklı bir konumu da belirtip kaynak dosyalarını oraya kopyalayabiliriz.
+
+
+
+### Önemli ayarlar:
+
+- worker_processes: CPU çekirdek sayısı kadar.
+
+- worker_connections: Her işlem için eşzamanlı bağlantı sayısı.
+
+- access_log & error_log: Kayıt dosyaları.
+
+- gzip: Yanıt sıkıştırması, performans artırır.
+
+### Sites dizinleri:
+
+- sites-available: Tüm site yapılandırmaları.
+
+- sites-enabled: Aktif siteler; sites-available dosyaları buraya sembolik bağlanır.
+
+
+### Bloklar:
+
+- Server bloğu: Belirli sanal sunucular için; birden fazla olabilir.
+- Location bloğu: URI’ye göre istek yönlendirmesi (try_files, proxy_pass, rewrite).
+- Upstream bloğu: Proxy veya yük dengeleme sunucularını tanımlar.
+
+
+### NGINX'i başlatın
+
+```bash
+sudo service nginx start
+```
+
+### Herhangi bir değişiklik yaptığımızda, aşağıdaki komutu kullanarak (kesintisiz olarak) onu yeniden yüklememiz yeterli olacaktır.
+
+
+```bash
+service nginx reload
+```
+
+
+### NGINX'in durumunu kontrol etme
+
+
+```bash
+service nginx status
+```
+
+
+Kullanıma hazır pek çok özelliğiyle NGINX, uygulamanızı sunmanın veya diğer web sunucularınız için bir HTTP proxy'si veya yük dengeleyici olarak kullanmanın harika bir yolu olabilir. NGINX'in çalışma ve istekleri işleme şeklini anlamak, uygulamalarınızın yükünü ölçeklendirmenize ve dengelemenize büyük katkı sağlayacaktır.
+
+
+## Nginx Agent
+
+NGINX Açık Kaynak veya NGINX Plus örneğiniz için bir yardımcı programdır. Şunları sağlar:
+
+- NGINX yapılandırmalarının uzaktan yönetimi
+- Gerçek zamanlı NGINX performans ve işletim sistemi ölçümlerinin toplanması ve raporlanması
+- NGINX olaylarının bildirimleri
+
+<img width="885" height="325" alt="image" src="https://github.com/user-attachments/assets/e2740baf-c1e4-4453-931b-476647455955" />
+
+NGINX Agent tarafından bildirilen metrikleri gösteren Grafana panosu
+
+
+- Resim kaynakçası -> https://docs.nginx.com/nginx-agent/overview/
+
+
+
+### Nasıl çalışır?
+
+NGINX Agent, NGINX çalıştıran bir sistemde yardımcı bir işlem olarak çalışır. Yapılandırma yönetimi ve NGINX işlemlerinden ve işletim sisteminden ölçüm toplama için gRPC ve REST arayüzleri sağlar. NGINX Agent, yaygın Linux araçlarını kullanarak NGINX ile uzaktan etkileşime olanak tanır ve büyük NGINX örnek koleksiyonlarını yönetebilen gelişmiş izleme ve kontrol sistemleri oluşturma olanağı sunar.
+
+
+<img width="852" height="654" alt="image" src="https://github.com/user-attachments/assets/15f4c545-74bf-4dbc-a565-a507bf57eeee" />
 
 
 
@@ -371,3 +491,6 @@ https://konghq.com/blog/learning-center/what-is-an-api-gateway
 https://bulutistan.com/blog/load-balancer-yuk-dengeleyici-nedir/
 https://www.cloudflare.com/learning/cdn/what-is-a-cdn/
 https://www.ibm.com/think/topics/content-delivery-networks
+https://medium.com/@aedemirsen/nginx-nedir-nginx-ile-bir-web-sayfas%C4%B1-nas%C4%B1l-sunulur-670eefadd047
+https://kinsta.com/blog/what-is-nginx/
+https://docs.nginx.com/nginx-agent/overview/   -> Nginx Agent
