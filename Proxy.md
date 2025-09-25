@@ -21,6 +21,7 @@ Proxy nasıl kullanılır? Bazı kişiler proxy'leri kişisel amaçlar için kul
 - Çökmeleri önlemek için internet trafiğini dengeleyin
 - Ofisteki çalışanların ve personelin web sitelerine erişimini kontrol edin
 - Dosyaları önbelleğe alarak veya gelen trafiği sıkıştırarak bant genişliğinden tasarruf edin
+
 ---
 
 ## Proxy nasıl çalışır?
