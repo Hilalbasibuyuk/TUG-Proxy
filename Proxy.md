@@ -1,4 +1,4 @@
-# TUG-Proxy-Reverse/Forward Proxy-Load Balancer-API Gateway-Traefik
+# TUG-Proxy-Reverse/Forward Proxy-Load Balancer-API Gateway-Traefik, CDN(Content Delivery Network)
 
 ## Proxy Nedir
 
