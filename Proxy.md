@@ -585,6 +585,53 @@ Bunlara ek olarak consul, highly fault tolerant‘a sahiptir. Tüm Consul servic
 
 - Consul'a bir bütün olarak baktığımızda ise altyapımızdaki service’leri discovery edebilmemiz ve configuring işlemlerini yapabilmemiz için geliştirilmiş bir tool’dur diyebiliriz.
 
+
+### Genel Amaç & Problemler
+
+- Büyük ölçekli dağıtık uygulamalarda yapılandırma (configuration) yönetimi önemli bir sorun olur.
+
+- Yapılandırma verisini uygulama ayar dosyasında tuttuğumuzda, değer değiştiğinde uygulamayı yeniden dağıtım ya da yeniden başlatma gerekir.
+
+- Veriyi doğrudan veritabanında tutmak da gecikme ve performans sorunlarına neden olabilir; veriyi önbelleğe almak çözüm olsa bile önbellek senkronizasyonu zorlaşabilir.
+
+- Bu yüzden, dinamik (runtime) yapılandırma yönetimi önem kazanır: uygulama çalışırken yapılandırma değerlerinin değişebilmesi, uygulamanın yeniden başlatılmasına gerek kalmadan yeni değerlere geçebilmesi gerekir.
+
+
+### Çözüm Olarak Consul + Key/Value Store + İzleme (Watch / Polling)
+
+Yapılandırma verisinin Key/Value (KV) store kullanılarak tutulması iyi bir fikirdir; bu KV store’un değişiklikleri “pub/sub” tarzı bir mekanizma ile uygulamaya bildirmesi ideal.
+
+Böylece uygulama, yapılandırma değiştiğinde yenileriyle kendini güncelleyebilir, yeniden başlatmaya gerek kalmaz.
+
+Consul, bu amaç için popüler bir seçenek olarak öne çıkar: konsol sadece bir KV store değil, servis keşfi (service discovery), güvenli servis iletişimi ve çoklu veri merkezi desteği gibi yetenekler de sağlar.
+
+
+### Bazı popüler anahtar-değer depoları şunlardır:
+
+- Aerospike
+- Apache Cassandra
+- Berkeley DB
+- Couchbase Sunucusu
+- Redis
+- Riak
+- Konsolos
+
+
+
+### Beklenen Özellikler & Dikkat Edilmesi Gerekenler
+
+- Dynamic configuration — Yapılandırma değişikliği uygulama çalışırken uygulanabilmeli.
+
+- Exception Handling — On Load sırasında hata oluşursa ne olacak?, On Watch / izleme sırasında bir hata olursa ne olacak?
+
+- Fallback Senaryoları — Consul erişilemezse ya da hata oluşursa, uygulama ne yapacak?
+
+- Ayrıca farklı diller (C#, Go, Java, Python vs.) için Consul SDK / client kütüphaneleri kullanılabilir.
+
+
+
+
+
 ### NOT: Nginx + CDN + Consul kombinasyonu, modern web uygulamalarında yük dağıtımı, güvenlik, performans ve servis yönetimini birlikte sağlar.
 
 
@@ -603,3 +650,4 @@ https://kinsta.com/blog/what-is-nginx/
 https://docs.nginx.com/nginx-agent/overview/ 
 https://medium.com/i%CC%87yi-programlama/microservice-mimarilerinde-service-discovery-7a6ebceb1b2a
 https://gokhan-gokalp.com/microservice-mimarilerinde-consul-ile-service-discovery/
+https://gizemcifguvercin.medium.com/configuration-management-with-consul-ba4f6524a43b
